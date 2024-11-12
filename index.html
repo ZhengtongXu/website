@@ -87,7 +87,8 @@
                 <a href="#" onclick="toggleBibtex(event, 'LeTac'); return false;">bibtex</a>
 
                 <div id="LeTac" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
-                  <pre style="margin:0;">
+                  <button onclick="copyBibtex(event, 'LeTac-content')" style="float:right; margin-bottom:5px;">Copy</button>
+                  <pre id="LeTac-content" style="margin:0;">
                     @article{xu2024letac,
                       author={Xu, Zhengtong and She, Yu},
                       journal={IEEE Transactions on Robotics}, 
@@ -96,7 +97,8 @@
                       volume={40},
                       number={},
                       pages={4376-4395},
-                      doi={10.1109/TRO.2024.3463470}}
+                      doi={10.1109/TRO.2024.3463470}
+                    }
                   </pre>
                   <a href="#" onclick="toggleBibtex(event, 'LeTac'); return false;">Close</a>
                 </div>
@@ -128,7 +130,8 @@
                 <a href="#" onclick="toggleBibtex(event, 'UniT'); return false;">bibtex</a>
 
                 <div id="UniT" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
-                  <pre style="margin:0;">
+                  <button onclick="copyBibtex(event, 'UniT-content')" style="float:right; margin-bottom:5px;">Copy</button>
+                  <pre id="UniT-content" style="margin:0;">
                     @article{xu2024unit,
                       title={UniT: Unified Tactile Representation for Robot Learning},
                       author={Xu, Zhengtong and Uppuluri, Raghava and Zhang, Xinwei and Fitch, Cael and Crandall, Philip Glen and Shou, Wan and Wang, Dongyi and She, Yu},
@@ -190,7 +193,8 @@
                 <a href="#" onclick="toggleBibtex(event, 'LeTO'); return false;">bibtex</a>
 
                 <div id="LeTO" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
-                  <pre style="margin:0;">
+                  <button onclick="copyBibtex(event, 'LeTO-content')" style="float:right; margin-bottom:5px;">Copy</button>
+                  <pre id="LeTO-content" style="margin:0;">
                     @article{xu2024leto,
                       title={LeTO: Learning Constrained Visuomotor Policy with Differentiable Trajectory Optimization},
                       author={Xu, Zhengtong and She, Yu},
@@ -226,7 +230,8 @@
                 <a href="#" onclick="toggleBibtex(event, 'Vistac'); return false;">bibtex</a>
 
                 <div id="Vistac" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
-                  <pre style="margin:0;">
+                  <button onclick="copyBibtex(event, 'Vistac-content')" style="float:right; margin-bottom:5px;">Copy</button>
+                  <pre id="Vistac-content" style="margin:0;">
                     @article{athar2023vistac,
                       title={Vistac towards a unified multi-modal sensing finger for robotic manipulation},
                       author={Athar, Sheeraz and Patel, Gaurav and Xu, Zhengtong and Qiu, Qiang and She, Yu},
@@ -258,8 +263,7 @@
               </tr>
             </tbody>
           </table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"></table>
-            <tbody>
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
               <tr>
                 <td style="padding:20px;width:100%;vertical-align:middle">
                   <h2>Reviewer Service</h2>
@@ -269,8 +273,7 @@
                   </ul>
                 </td>
               </tr>
-            </tbody>
-          </table>
+            </tbody></table>
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
             <tbody>
               <tr>
@@ -311,6 +314,35 @@
         } else {
           bibtexDiv.style.display = 'none';
         }
+      }
+
+      function copyBibtex(event, contentId) {
+        event.stopPropagation();
+        const content = document.getElementById(contentId).textContent;
+        const lines = content.split('\n')
+          .map(line => line.trim())
+          .filter(line => line); // Remove empty lines
+
+        const formattedLines = lines.map((line, index) => {
+          if (index === 0) return line;  // First line
+          if (line === '}') return line;  // Closing brace
+          return '  ' + line;  // All other lines
+        });
+
+        const formattedContent = formattedLines.join('\n');
+
+        navigator.clipboard.writeText(formattedContent)
+          .then(() => {
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => {
+              button.textContent = originalText;
+            }, 1500);
+          })
+          .catch(err => {
+            console.error('Failed to copy:', err);
+          });
       }
     </script>
   </body>

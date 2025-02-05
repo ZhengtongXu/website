@@ -149,10 +149,26 @@
                   <br>
                 </p>
 
-                <a href="">arXiv(soon)</a> /
-                <a href="">video(soon)</a> /
+                <a href="https://arxiv.org/abs/2502.01784">arXiv</a> /
+                <a href="https://www.youtube.com/watch?v=sfa_AmI0NoI">video</a> /
                 <a href="https://github.com/ZhengtongXu/VILP">code</a>
+                <a href="#" onclick="toggleBibtex(event, 'VILP'); return false;">bibtex</a>
 
+                <div id="VILP" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                  <button onclick="copyBibtex(event, 'VILP-content')" style="float:right; margin-bottom:5px;">Copy</button>
+                  <pre id="VILP-content" style="margin:0;">
+                    @misc{xu2025vilp,
+                      title={VILP: Imitation Learning with Latent Video Planning}, 
+                      author={Zhengtong Xu and Qiang Qiu and Yu She},
+                      year={2025},
+                      eprint={2502.01784},
+                      archivePrefix={arXiv},
+                      primaryClass={cs.RO},
+                      url={https://arxiv.org/abs/2502.01784}, 
+                    }
+                  </pre>
+                  <a href="#" onclick="toggleBibtex(event, 'UniT'); return false;">Close</a>
+                </div>
                 
                 <p></p>
                 <p>

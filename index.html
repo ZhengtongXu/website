@@ -348,8 +348,22 @@
                   <br>
                 </p>
 
-                <a href="">arXiv(soon)</a> /
+                <a href="https://ieeexplore.ieee.org/document/11023035">paper</a> /
                 <a href="https://www.youtube.com/watch?v=F_fksjqySqE">video</a>
+                <a href="#" onclick="toggleBibtex(event, 'scbf'); return false;">bibtex</a>
+
+                <div id="scbf" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                  <button onclick="copyBibtex(event, 'scbf-content')" style="float:right; margin-bottom:5px;">Copy</button>
+                  <pre id="scbf-content" style="margin:0;">
+                    @ARTICLE{xu2025rtcbf,
+                      author={Sharma, Vipul K. and Zhou, Pokuang and Xu, Zhengtong and She, Yu and Sivaranjani, S.},
+                      journal={IEEE/ASME Transactions on Mechatronics}, 
+                      title={Safe Human–Robot Collaboration With Risk Tunable Control Barrier Functions}, 
+                      year={2025},
+                      doi={10.1109/TMECH.2025.3572047}}
+                  </pre>
+                  <a href="#" onclick="toggleBibtex(event, 'scbf'); return false;">Close</a>
+                </div>
                 <p></p>
                 <p>
                   We address safety in human-robot collaboration with uncertain human positions by formulating a chance-constrained problem using uncertain control barrier functions.

@@ -137,3 +137,21 @@ h2 {
 span.highlight {
   background-color: #ffffd0;
 }
+
+/* News section styles */
+.news-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.news-list li {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.news-date {
+  font-weight: 700;
+  color: #2d7a4f;
+  font-size: 14px;
+  margin-right: 6px;
+}

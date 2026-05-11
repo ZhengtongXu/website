@@ -244,7 +244,24 @@
 
                 <a href="https://mlzxy.github.io/rla-wm/">website</a> /
                 <a href="https://arxiv.org/abs/2605.07079">arXiv</a> /
-                <a href="https://github.com/mlzxy/rla-wm">code</a>
+                <a href="https://github.com/mlzxy/rla-wm">code</a> /
+                <a href="#" onclick="toggleBibtex(event, 'rlawm'); return false;">bibtex</a>
+
+                <div id="rlawm" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                  <button onclick="copyBibtex(event, 'rlawm-content')" style="float:right; margin-bottom:5px;">Copy</button>
+                  <pre id="rlawm-content" style="margin:0;">
+                    @misc{zhang2026rla,
+                          title={Learning Visual Feature-Based World Models via Residual Latent Action}, 
+                          author={Xinyu Zhang and Zhengtong Xu and Yutian Tao and Yeping Wang and Yu She and Abdeslam Boularias},
+                          year={2026},
+                          eprint={2605.07079},
+                          archivePrefix={arXiv},
+                          primaryClass={cs.CV},
+                          url={https://arxiv.org/abs/2605.07079}, 
+                    }
+                  </pre>
+                  <a href="#" onclick="toggleBibtex(event, 'rlawm'); return false;">Close</a>
+                </div>
 
               </td>
             </tr>

@@ -174,8 +174,8 @@
                   * indicates equal contribution. <sup>†</sup> indicates equal advising. Selected papers are <span class="highlight-text">highlighted</span>.
                 </p>
                 <p>
-                  <button class="filter-btn active-filter" id="btn-all" onclick="setFilter('all')">All</button>
-                  <button class="filter-btn" id="btn-selected" onclick="setFilter('selected')">Selected</button>
+                  <button class="filter-btn active-filter" id="btn-selected" onclick="setFilter('selected')">Selected</button>
+                  <button class="filter-btn" id="btn-all" onclick="setFilter('all')">All</button>
                 </p>
                 <p>
                   My research focuses on developing learning frameworks that enable robots to perform everyday manipulation tasks with human-level proficiency and dexterity. Toward this goal, my work spans several key areas in robot learning, including multisensory dexterity, agentic robotics, world models, and optimization for learning and control.
@@ -184,7 +184,7 @@
             </tr>
           </tbody></table>
 
-          <table id="papers-table" class="show-all-mode" width="100%" align="center" border="0" cellspacing="0" cellpadding="15">
+          <table id="papers-table" class="show-selected-mode" width="100%" align="center" border="0" cellspacing="0" cellpadding="15">
 
 
             <tr class="paper-row selected-paper">
@@ -477,7 +477,7 @@
             </tr>
 
 
-            <tr class="paper-row selected-paper">
+            <tr class="paper-row">
               <td width="40%" valign="top" align="center">
               <video playsinline autoplay loop muted src="images/manifeel.mp4" alt="sym" width="90%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
               </a></td>
@@ -980,6 +980,8 @@
             console.error('Failed to copy:', err);
           });
       }
+
+      document.addEventListener('DOMContentLoaded', () => setFilter('selected'));
     </script>
   </body>
 </html>

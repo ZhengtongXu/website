@@ -226,4 +226,20 @@ span.highlight {
   .paper-row > td > div {
     width: 100% !important;
   }
+  #papers-table tr.selected-paper td {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  #papers-table tr.selected-paper td:first-child {
+    border-radius: 15px 15px 0 0 !important;
+    border-left: 0 !important;
+    padding-top: 12px !important;
+  }
+  #papers-table tr.selected-paper td:last-child {
+    border-radius: 0 0 15px 15px !important;
+    border-right: 0 !important;
+    padding-bottom: 12px !important;
+  }
 }

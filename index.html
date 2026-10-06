@@ -8,14 +8,22 @@
     <meta name="author" content="Zhengtong Xu">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
+    <script>
+      (function () {
+        var theme = 'dark';
+        try { theme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <style>
       .filter-btn {
         padding: 4px 14px;
-        border: 1px solid #bbb;
+        border: 1px solid var(--btn-border);
         border-radius: 15px;
         cursor: pointer;
-        background: #f5f5f5;
+        background: var(--btn-bg);
+        color: var(--text);
         font-size: 13px;
         margin-right: 6px;
         transition: all 0.2s;
@@ -36,26 +44,26 @@
       }
       #papers-table tr.selected-paper td {
         background-color: rgba(66, 133, 244, 0.10);
-        border-top: 6px solid white;
-        border-bottom: 6px solid white;
+        border-top: 6px solid var(--bg);
+        border-bottom: 6px solid var(--bg);
       }
       #papers-table tr.selected-paper td:first-child {
         border-radius: 15px 0 0 15px;
-        border-left: 4px solid white;
+        border-left: 4px solid var(--bg);
       }
       #papers-table tr.selected-paper td:last-child {
         border-radius: 0 15px 15px 0;
-        border-right: 4px solid white;
+        border-right: 4px solid var(--bg);
       }
       #papers-table em {
         font-weight: bold;
       }
       #papers-table em.workshop {
         font-weight: normal;
-        color: #555;
+        color: var(--muted);
       }
       #papers-table em.workshop a {
-        color: #555;
+        color: var(--muted);
         text-decoration: none;
       }
     </style>
@@ -71,12 +79,13 @@
               <td style="padding:2.5%;width:63%;vertical-align:middle">
                 <p class="name" style="text-align: center;">
                   Zhengtong Xu    徐政通
+                  <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
                 </p>
                 <p style="text-align: center; font-size: 12px;">
                   Email: <a href="mailto:xu1703@purdue.edu">xu1703 AT purdue.edu</a>
                 </p>
                 <p>
-                  I am Zhengtong Xu. I'm a final-year (fifth-year) PhD candidate in robotics at <a href="https://www.purdue.edu/"><img src="images/purdue_logo.png" alt="Purdue Logo" style="height:1em; vertical-align:middle; margin-right:3px;">Purdue University</a>, advised by Professor <a href="https://www.purduemars.com/">Yu She</a>.
+                  I am Zhengtong Xu, and I go by Tong. I'm a final-year (fifth-year) PhD candidate in robotics at <a href="https://www.purdue.edu/"><img src="images/purdue_logo.png" alt="Purdue Logo" style="height:1em; vertical-align:middle; margin-right:3px;">Purdue University</a>, advised by Professor <a href="https://www.purduemars.com/">Yu She</a>.
                 </p>
 
                 <p>
@@ -146,7 +155,7 @@
                   <br>
                   <em>Robotics: Science and Systems (RSS), 2026</em>
                   <br>
-                  <em class="workshop"><span style="color:#B22222; font-weight:bold;">Outstanding Paper Award</span> & Oral Presentation, <a href="https://sense-of-space.github.io/cfp.html">Sense of Space Workshop, CVPR 2026</a></em>
+                  <em class="workshop"><span style="color:var(--award); font-weight:bold;">Outstanding Paper Award</span> & Oral Presentation, <a href="https://sense-of-space.github.io/cfp.html">Sense of Space Workshop, CVPR 2026</a></em>
                   <br>
                   <em class="workshop">Oral Presentation, <a href="https://tactile-dexterity-iros.github.io/">Scalable Tactile Sensing for Dexterous Manipulation Workshop, IROS 2026</a></em>
                   <br>
@@ -159,7 +168,7 @@
                 <a href="https://drive.google.com/file/d/1Iab5Os_zGvrEvLAlnfa_GjLrHYwAuttK/view?usp=sharing">video</a> /
                 <a href="#" onclick="toggleBibtex(event, 'cgp'); return false;">bibtex</a>
 
-                <div id="cgp" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="cgp" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'cgp-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="cgp-content" style="margin:0;">
                     @misc{xu2026cgp,
@@ -198,7 +207,7 @@
                 <a href="https://github.com/mlzxy/rla-wm">code</a> /
                 <a href="#" onclick="toggleBibtex(event, 'rlawm'); return false;">bibtex</a>
 
-                <div id="rlawm" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="rlawm" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'rlawm-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="rlawm-content" style="margin:0;">
                     @misc{zhang2026rla,
@@ -238,7 +247,7 @@
                 <a href="https://arxiv.org/abs/2603.14068">arXiv</a> /
                 <a href="#" onclick="toggleBibtex(event, 'stiffnesscopilot'); return false;">bibtex</a>
 
-                <div id="stiffnesscopilot" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="stiffnesscopilot" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'stiffnesscopilot-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="stiffnesscopilot-content" style="margin:0;">
                     @misc{wang2026sc,
@@ -298,7 +307,7 @@
                 <a href="https://arxiv.org/abs/2603.12665">arXiv</a> /
                 <a href="#" onclick="toggleBibtex(event, 'tacvla'); return false;">bibtex</a>
 
-                <div id="tacvla" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="tacvla" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'tacvla-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="tacvla-content" style="margin:0;">
                     @misc{zhang2026tacvla,
@@ -338,7 +347,7 @@
                 <a href="https://github.com/ZhixianHu/MuxGel">code</a> /
                 <a href="#" onclick="toggleBibtex(event, 'muxgel_bib'); return false;">bibtex</a>
 
-                <div id="muxgel_bib" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="muxgel_bib" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'muxgel_bib-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="muxgel_bib-content" style="margin:0;">
                     @misc{hu2026muxgel,
@@ -376,7 +385,7 @@
                 <a href="https://arxiv.org/abs/2604.23609">arXiv</a> /
                 <a href="#" onclick="toggleBibtex(event, 'tdp'); return false;">bibtex</a>
 
-                <div id="tdp" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="tdp" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'tdp-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="tdp-content" style="margin:0;">
                     @misc{xue2026tdp,
@@ -400,7 +409,7 @@
               <td width="40%" valign="top" align="center">
               <div style="width:90%; margin:0 auto;">
                 <video playsinline autoplay loop muted src="images/Planar Teaser.mp4" alt="sym" style="width:100%; padding-top:0px; padding-bottom:0px; border-radius:15px; display:block;"></video>
-                <p style="font-size:13px; color:#555; margin-top:4px; text-align:left;"><strong>Prompt:</strong> Put the potato into the pot, close the pot, then put the salt container in the top drawer and close the drawer.</p>
+                <p style="font-size:13px; color:var(--muted); margin-top:4px; text-align:left;"><strong>Prompt:</strong> Put the potato into the pot, close the pot, then put the salt container in the top drawer and close the drawer.</p>
               </div>
               </a></td>
               <td width="60%" valign="top">
@@ -418,7 +427,7 @@
                 <a href="">code(soon)</a> /
                 <a href="#" onclick="toggleBibtex(event, 'agenticlab'); return false;">bibtex</a>
 
-                <div id="agenticlab" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="agenticlab" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'agenticlab-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="agenticlab-content" style="margin:0;">
                     @misc{guo2026planar,
@@ -457,7 +466,7 @@
                 <a href="https://drive.google.com/file/d/130fI480FyN5pN2f_YaKsPA6R6kqO6koV/view?usp=sharing">video</a> /
                 <a href="#" onclick="toggleBibtex(event, 'unic'); return false;">bibtex</a>
 
-                <div id="unic" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="unic" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'unic-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="unic-content" style="margin:0;">
                     @misc{xu2026unic,
@@ -490,7 +499,7 @@
                   <br>
                   <em class="workshop">Oral Presentation, <a href="https://nems25.github.io/">New England Manipulation Symposium 2025</a></em>
                   <br>
-                  <em class="workshop"><span style="color:#B22222; font-weight:bold;">Best Paper Award</span> & Oral Presentation, <a href="https://sense-of-space.github.io/cfp.html">Sense of Space Workshop, CVPR 2026</a></em>
+                  <em class="workshop"><span style="color:var(--award); font-weight:bold;">Best Paper Award</span> & Oral Presentation, <a href="https://sense-of-space.github.io/cfp.html">Sense of Space Workshop, CVPR 2026</a></em>
                   <br>
                 </p>
 
@@ -499,7 +508,7 @@
                 <a href="https://github.com/purdue-mars/manifeel">code</a> /
                 <a href="#" onclick="toggleBibtex(event, 'manifeel'); return false;">bibtex</a>
 
-                <div id="manifeel" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="manifeel" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'manifeel-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="manifeel-content" style="margin:0;">
                     @misc{luu2025manifeel,
@@ -542,7 +551,7 @@
                 <a href="https://github.com/ZhangZhiyuanZhang/canonical_policy">code</a> /
                 <a href="#" onclick="toggleBibtex(event, 'cp'); return false;">bibtex</a>
 
-                <div id="cp" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="cp" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'cp-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="cp-content" style="margin:0;">
                     @misc{zhang2025canonical,
@@ -582,7 +591,7 @@
                 <a href="https://github.com/ZhengtongXu/DiffOG">code</a> /
                 <a href="#" onclick="toggleBibtex(event, 'DiffOG'); return false;">bibtex</a>
 
-                <div id="DiffOG" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="DiffOG" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'DiffOG-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="DiffOG-content" style="margin:0;">
                     @misc{xu2025diffog,
@@ -621,7 +630,7 @@
                 <a href="https://github.com/ZhengtongXu/UniT">code</a> /
                 <a href="#" onclick="toggleBibtex(event, 'UniT'); return false;">bibtex</a>
 
-                <div id="UniT" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="UniT" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'UniT-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="UniT-content" style="margin:0;">
                     @misc{xu2025unit,
@@ -659,7 +668,7 @@
                 <a href="https://github.com/ZhengtongXu/VILP">code</a> /
                 <a href="#" onclick="toggleBibtex(event, 'VILP'); return false;">bibtex</a>
 
-                <div id="VILP" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="VILP" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'VILP-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="VILP-content" style="margin:0;">
                     @misc{xu2025vilp,
@@ -696,7 +705,7 @@
                 <a href="https://www.youtube.com/watch?v=F_fksjqySqE">video</a> /
                 <a href="#" onclick="toggleBibtex(event, 'scbf'); return false;">bibtex</a>
 
-                <div id="scbf" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="scbf" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'scbf-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="scbf-content" style="margin:0;">
                     @ARTICLE{xu2025rtcbf,
@@ -731,7 +740,7 @@
                 <a href="https://github.com/ZhengtongXu/LeTac-MPC">code</a> /
                 <a href="#" onclick="toggleBibtex(event, 'LeTac'); return false;">bibtex</a>
 
-                <div id="LeTac" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="LeTac" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'LeTac-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="LeTac-content" style="margin:0;">
                     @article{xu2024letac,
@@ -770,7 +779,7 @@
                 <a href="https://github.com/ZhengtongXu/LeTO">code</a> /
                 <a href="#" onclick="toggleBibtex(event, 'LeTO'); return false;">bibtex</a>
 
-                <div id="LeTO" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="LeTO" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'LeTO-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="LeTO-content" style="margin:0;">
                     @article{xu2024leto,
@@ -804,7 +813,7 @@
                 <a href="https://www.youtube.com/watch?v=SLN2gQ_haYs">video</a> /
                 <a href="#" onclick="toggleBibtex(event, 'Vistac'); return false;">bibtex</a>
 
-                <div id="Vistac" style="display:none; position:absolute; background-color:white; border:1px solid #ccc; padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
+                <div id="Vistac" style="display:none; position:absolute; background-color:var(--popup-bg); color:var(--text); border:1px solid var(--border); padding:10px; width:400px; z-index:100; border-radius:15px; overflow:auto; word-wrap:break-word;">
                   <button onclick="copyBibtex(event, 'Vistac-content')" style="float:right; margin-bottom:5px;">Copy</button>
                   <pre id="Vistac-content" style="margin:0;">
                     @article{athar2023vistac,
@@ -884,8 +893,8 @@
                   <h2>Awards</h2>
                   <ul>
                     <li><strong>Lee A. Chaden Fellowship</strong>, Purdue University, 2026</li>
-                    <li><strong>Bilsland Dissertation Fellowship</strong>, Purdue University, 2026<br><span style="font-size: 0.9em; color: #666;">(valued at $62,513.22, supporting final year of PhD studies)</span></li>
-                    <li><strong>Magoon Graduate Student Research Excellence Award</strong>, Purdue University, 2025<br><span style="font-size: 0.9em; color: #666;">(awarded to only 25 PhD students across the entire Purdue College of Engineering)</span></li>
+                    <li><strong>Bilsland Dissertation Fellowship</strong>, Purdue University, 2026<br><span style="font-size: 0.9em; color: var(--muted);">(valued at $62,513.22, supporting final year of PhD studies)</span></li>
+                    <li><strong>Magoon Graduate Student Research Excellence Award</strong>, Purdue University, 2025<br><span style="font-size: 0.9em; color: var(--muted);">(awarded to only 25 PhD students across the entire Purdue College of Engineering)</span></li>
                     <li><strong>Dr. Theodore J. and Isabel M. Williams Fellowship</strong>, Purdue University, 2022</li>
                     <li><strong>National Scholarship</strong>,  Ministry of Education of China, 2017</li>
                   </ul>
@@ -996,7 +1005,22 @@
           });
       }
 
-      document.addEventListener('DOMContentLoaded', () => setFilter('selected'));
+      function updateThemeToggle() {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        document.getElementById('theme-toggle').textContent = dark ? '☀️' : '🌙';
+      }
+
+      function toggleTheme() {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        updateThemeToggle();
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        setFilter('selected');
+        updateThemeToggle();
+      });
     </script>
   </body>
 </html>

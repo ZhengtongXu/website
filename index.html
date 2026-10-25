@@ -15,7 +15,7 @@
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css?v=20261006">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css?v=20261025-2">
     <style>
       .filter-btn {
         padding: 4px 14px;
@@ -79,7 +79,15 @@
               <td style="padding:2.5%;width:63%;vertical-align:middle">
                 <p class="name" style="text-align: center;">
                   Zhengtong Xu    徐政通
-                  <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
+                  <button id="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Switch color theme" title="Switch color theme">
+                    <svg class="theme-icon theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <circle cx="12" cy="12" r="4"></circle>
+                      <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+                    </svg>
+                    <svg class="theme-icon theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <path d="M20.9 13.3A9 9 0 0 1 10.7 3.1 9 9 0 1 0 20.9 13.3Z"></path>
+                    </svg>
+                  </button>
                 </p>
                 <p style="text-align: center; font-size: 12px;">
                   Email: <a href="mailto:xu1703@purdue.edu">xu1703 AT purdue.edu</a>
@@ -848,7 +856,7 @@
                           <span class="exp-date">May 2026 – Present</span>
                         </div>
                         <div class="exp-role">Applied Scientist Intern, North Reading, MA</div>
-                        <div class="exp-detail">Hosts: <a href="https://www.mustafamukadam.com/">Mustafa Mukadam</a>, <a href="https://pranaythangeda.com/">Pranay Thangeda</a>, <a href="https://carolinahiguera.github.io/">Carolina Higuera</a>, and <a href="https://akashsharma02.github.io/">Akash Sharma</a></div>
+                        <div class="exp-detail">Host: <a href="https://www.mustafamukadam.com/">Mustafa Mukadam</a></div>
                         <div class="exp-detail">Topic: Foundation Dexterity Model</div>
                       </div>
                     </div>
@@ -1007,7 +1015,10 @@
 
       function updateThemeToggle() {
         const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        document.getElementById('theme-toggle').textContent = dark ? '☀️' : '🌙';
+        const button = document.getElementById('theme-toggle');
+        const label = dark ? 'Switch to light mode' : 'Switch to dark mode';
+        button.setAttribute('aria-label', label);
+        button.setAttribute('title', label);
       }
 
       function toggleTheme() {

@@ -273,6 +273,32 @@ span.highlight {
 }
 
 /* Experience section styles */
+.experience-summary {
+  line-height: 1.8;
+}
+
+.company-link {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.company-logo {
+  width: 1.4em;
+  height: 1em;
+  margin-right: 0.3em;
+  object-fit: contain;
+  vertical-align: -0.125em;
+}
+
+.company-logo-amazon {
+  width: 1.8em;
+}
+
+.company-logo-merl {
+  width: 1.16em;
+  margin-right: 0.2em;
+}
+
 .experience-list {
   padding-left: 0;
   margin-top: 15px;
